@@ -418,6 +418,26 @@
 				return false;
 		}
 		
+		function checkEmailexistance(inputemail){
+			alert("inn");
+			$.ajax({  
+				url:"checkEmailexistance.php",  
+				type:"json",
+				method:"POST",  
+				data:{'email_id':inputemail},  
+				success:function(data)  
+				{  
+					var result = JSON.parse(data);
+					
+					if(result.num_rows>0){
+						return false;
+					}else{
+						return true;
+					}
+				}  
+			});
+		}
+		
 		function validateUser(){
 			$('.errClass').hide();
 			var fname = $('#fname').val();
@@ -442,6 +462,10 @@
 				$('#email').focus();
 				$('#email_err').show();
 				$('#email_err').text('Please enter valid email id');
+			}else if(email.trim()!='' && !checkEmailexistance(email)){
+				$('#email').focus();
+				$('#email_err').show();
+				$('#email_err').text('Email id already exists');
 			}else if(contact_no!='' && !validateMobile(contact_no)){
 				$('#contact_no').focus();
 				$('#contact_no_err').show();
