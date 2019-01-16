@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2019 at 02:29 PM
+-- Generation Time: Jan 16, 2019 at 07:36 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.6.20
 
@@ -19,6 +19,35 @@ SET time_zone = "+00:00";
 --
 -- Database: `room_booking_system`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_hotel_master`
+--
+
+CREATE TABLE `tbl_hotel_master` (
+  `hotel_id` int(11) NOT NULL,
+  `hotel_name` varchar(500) DEFAULT NULL,
+  `hotel_address` varchar(500) NOT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_deleted` int(2) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_room_master`
+--
+
+CREATE TABLE `tbl_room_master` (
+  `room_id` int(11) NOT NULL,
+  `hotel_id` int(11) DEFAULT NULL,
+  `room_name` varchar(200) DEFAULT NULL,
+  `capacity` int(11) DEFAULT NULL,
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `is_deleted` int(2) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -55,6 +84,18 @@ INSERT INTO `tbl_users` (`uid`, `first_name`, `last_name`, `email`, `password`, 
 --
 
 --
+-- Indexes for table `tbl_hotel_master`
+--
+ALTER TABLE `tbl_hotel_master`
+  ADD PRIMARY KEY (`hotel_id`);
+
+--
+-- Indexes for table `tbl_room_master`
+--
+ALTER TABLE `tbl_room_master`
+  ADD PRIMARY KEY (`room_id`);
+
+--
 -- Indexes for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
@@ -66,10 +107,20 @@ ALTER TABLE `tbl_users`
 --
 
 --
+-- AUTO_INCREMENT for table `tbl_hotel_master`
+--
+ALTER TABLE `tbl_hotel_master`
+  MODIFY `hotel_id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `tbl_room_master`
+--
+ALTER TABLE `tbl_room_master`
+  MODIFY `room_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `tbl_users`
 --
 ALTER TABLE `tbl_users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
