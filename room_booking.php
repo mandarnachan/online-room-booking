@@ -1,6 +1,3 @@
-<?php 
-session_start();
-?>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -103,9 +100,9 @@ session_start();
 								</li>
 								<li><a href="dining-bar.html">Dining &amp; Bar</a></li>
 								<li><a href="aminities.html">Aminities</a></li>
-								<li><a href="blog.html">Blog</a></li>
+								<li class="active"><a href="blog.html">Blog</a></li>
 								<li><a href="about.html">About</a></li>
-								<li class="active"><a href="contact.html">Contact</a></li>
+								<li><a href="contact.html">Contact</a></li>
 								<li><a href="login.php">Login</a></li>
 							</ul>
 						</div>
@@ -122,8 +119,8 @@ session_start();
 			   			<div class="row">
 				   			<div class="col-md-6 col-sm-12 col-md-offset-3 slider-text">
 				   				<div class="slider-text-inner slider-text-inner2 text-center">
-				   					<h2>Experience new</h2>
-				   					<h1>Join Us</h1>
+				   					<h2>Read the latest events</h2>
+				   					<h1>Our Blog</h1>
 				   				</div>
 				   			</div>
 				   		</div>
@@ -133,61 +130,126 @@ session_start();
 		  	</div>
 		</aside>
 
-		<div id="colorlib-contact">
+		<div id="colorlib-blog">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-10 col-md-offset-1 animate-box">
-						<h3>Search Room</h3>
-						<form action="#">
-							<div class="row form-group">
-								<div class="col-md-4">
-									<label for="chkin_date">Check-in:</label>
-									<i class="icon icon-calendar2"></i>
-			                      <input type="text" id="chkin_date" name="chkin_date" class="form-control date" placeholder="mm/dd/yyyy">
-								</div>
-								<div class="col-md-4">
-									<label for="chkout_date">Check-out:</label>
-									<i class="icon icon-calendar2"></i>
-									<input type="text" id="chkout_date" name="chkout_date" class="form-control date" placeholder="mm/dd/yyyy">
-								</div>
-							</div>
-							<div class="row" id="roomsDiv">
-								<div class="row form-group" id="subDiv0">
-									<div class="col-md-2"><label>Room 1</label></div>
-									<div class="col-md-3">
-										<label for="adults0">Adults</label>
-										<i class="icon icon-arrow-down3"></i>
-										<select name="adults0" id="adults0" class="form-control">
-											<option value="1">1</option>
-											<option value="2">2</option>
-											<option value="3">3</option>
-											<option value="4">4</option>
-										</select>
-									</div>
-									<div class="col-md-3">
-										<label for="children0">Children</label>
-										<i class="icon icon-arrow-down3"></i>
-										<select name="children0" id="children0" class="form-control">
-											<option value="1">1</option>
-											<option value="2">2</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-md-4">
-									<input type="button" value="Add room" class="btn btn-primary" onclick="javascript:addRooms();">
-									<input type="button" value="Done" class="btn btn-primary" onclick="javascript:validateRoomBking();">
-								</div>	
-							</div>
+					<div class="col-md-7 col-md-push-5">
+						<article class="animate-box">
+							<div class="blog-img" style="background-image: url(images/blog-1.jpg);"></div>
+						</article>
+					</div>
 
-						</form>		
+					<div class="col-md-4 col-md-pull-7">
+						<div class="aside animate-box">
+							<h3>Search Room</h3>
+							<form method="post" class="colorlib-form">
+								<div class="row">
+									<div class="col-md-12">
+									  <div class="form-group">
+										<label for="chkin_date">Check-in:</label>
+										<div class="form-field">
+										  <i class="icon icon-calendar2"></i>
+										  <input type="text" id="chkin_date" name="chkin_date" class="form-control date" placeholder="mm/dd/yyyy" readonly />
+										</div>
+									  </div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="chkout_date">Check-out:</label>
+											<div class="form-field">		
+												<i class="icon icon-calendar2"></i>
+												<input type="text" id="chkout_date" name="chkout_date" class="form-control date" placeholder="mm/dd/yyyy" readonly />
+											</div>
+										</div>
+									</div>	
+								</div>
+								<div class="row" id="roomsDiv">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>srNo</th>
+												<th>Adults</th>
+												<th>Children</th>
+												<th>Remove</th>
+											</tr>
+										</thead>
+										<tbody id="roomsTbody">
+											<tr>
+												<td><label id="roomLabel0">Room 1</label></td>
+												<td>
+													<!--i class="icon icon-arrow-down3"></i-->
+													<select name="adults0" id="adults0" class="form-control">
+														<option value="#">1</option>
+														<option value="#">2</option>
+														<option value="#">3</option>
+														<option value="#">4</option>
+													</select>
+												</td>
+												<td>
+													<!--i class="icon icon-arrow-down3"></i-->
+													<select name="children0" id="children0" class="form-control">
+														<option value="#">1</option>
+														<option value="#">2</option>
+													</select>
+												</td>
+												<td>&nbsp;&nbsp;</td>
+											</tr>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td><input type="button" value="Add room" class="btn btn-primary" onclick="javascript:addRooms();" /></td>
+												<td><input type="button" value="Search" class="btn btn-primary" onclick="javascript:validateRoomBking();" /></td>
+											</tr>
+										</tfoot>
+									</table>	
+								<!--	<div class="col-md-2">
+										<div class="form-group">
+											<label id="roomLabel0">1</label>
+										</div>	
+									</div>
+									
+									<div class="col-md-4">
+									  <div class="form-group">
+										<label for="adults">Adults</label>
+										<div class="form-field">
+											<i class="icon icon-arrow-down3"></i>
+											<select name="adults" id="adults" class="form-control">
+												<option value="#">1</option>
+												<option value="#">2</option>
+												<option value="#">3</option>
+												<option value="#">4</option>
+											</select>
+										</div>
+									  </div>
+									</div>
+									<div class="col-md-4">
+									  <div class="form-group">
+										<label for="children">Children</label>
+										<div class="form-field">
+											<i class="icon icon-arrow-down3"></i>
+											<select name="children" id="children" class="form-control">
+												<option value="#">1</option>
+												<option value="#">2</option>
+											</select>
+										</div>
+									  </div>
+									</div>
+									<div class="col-md-2">
+										<input type="button" value="Delete" class="btn btn-primary" />
+									</div>
+								</div>
+								<div class="row">	
+									<div class="col-md-12">
+										<input type="button" value="Add room" class="btn btn-primary" onclick="javascript:addRooms();" />
+										<input type="button" value="Search" class="btn btn-primary" onclick="javascript:validateRoomBking();" />
+									</div>
+								</div>	-->
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
-		<div id="map" class="colorlib-map"></div>
 	
 		<div id="colorlib-subscribe" style="background-image: url(images/img_bg_2.jpg);">
 			<div class="overlay"></div>
@@ -260,7 +322,7 @@ session_start();
 					<div class="col-md-12 text-center">
 						<p>
 							<small class="block">
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart3" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart3" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
 							</small> 
 							<small class="block">Demo Images: <a href="http://unsplash.co/" target="_blank">Unsplash</a></small>
 						</p>
@@ -291,9 +353,6 @@ session_start();
 	<script src="js/magnific-popup-options.js"></script>
 	<!-- Date Picker -->
 	<script src="js/bootstrap-datepicker.js"></script>
-	<!-- Google Map -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="js/google_map.js"></script>
 	<!-- Main -->
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
@@ -335,20 +394,14 @@ session_start();
 		function addRooms(){
 			if(roomCount < 4){	
 				roomCount++;
-				console.log(roomCount);
-				roomStr = '<div class="row form-group" id="subDiv'+roomCount+'">'+
-						  '<div class="col-md-2"><label id="roomLabel'+roomCount+'"></label></div>'+
-						  '<div class="col-md-3"><label for="adults">Adults</label><i class="icon icon-arrow-down3"></i>'+
-						  '<select name="adults'+roomCount+'" id="adults'+roomCount+'" class="form-control">'+
-						  '<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>'+
-						  '</select></div>'+
-						  '<div class="col-md-3"><label for="children">Children</label><i class="icon icon-arrow-down3"></i>'+
-						  '<select name="children'+roomCount+'" id="children'+roomCount+'" class="form-control"><option value="1">1</option><option value="2">2</option>'+
-						  '</select></div>'+
-						  '<div class="col-md-1"><input type="button" value="Delete" class="btn btn-primary" onclick="javascript:removeRoom('+roomCount+');"/></div>'+
-						  '</div>';
+				roomStr = '<tr id="subDiv'+roomCount+'"><td><label id="roomLabel'+roomCount+'"></label></td>'+
+							'<td><select name="adults'+roomCount+'" id="adults'+roomCount+'" class="form-control">'+
+							'<option value="#">1</option><option value="#">2</option><option value="#">3</option><option value="#">4</option>'+
+							'</select></td>'+
+							'<td><select name="children'+roomCount+'" id="children'+roomCount+'" class="form-control"><option value="#">1</option><option value="#">2</option>'+
+							'</select></td><td><input type="button" value="Delete" class="btn btn-primary" onclick="javascript:removeRoom('+roomCount+');"/></td></tr>';
 				roomsArray[roomCount]	= 1;	  
-				$('#roomsDiv').append(roomStr);
+				$('#roomsTbody').append(roomStr);
 				serialNumber();
 			}	
 		}
@@ -357,12 +410,15 @@ session_start();
 			$('#subDiv'+count).remove();
 			roomsArray[count]	= 0;
 			serialNumber();
+			roomCount--;
 		}
 		
 		function serialNumber(){		
+			console.log(roomCount);
 			var count=1;
 			for (var i=1;i<=roomCount;i++)
-			{	if(roomsArray[i]!=0){
+			{	
+				if(roomsArray[i]!=0){
 					count++;
 					document.getElementById('roomLabel'+i+'').innerHTML = 'Room '+count;
 				}
@@ -387,9 +443,9 @@ session_start();
 			var chkin_date = $('#chkin_date').val();
 			var chkout_date = $('#chkout_date').val();
 			
-			if(chkin_date!=''){
+			if(chkin_date==''){
 				alert("Please select check in date");
-			}else if(chkout_date!=''){
+			}else if(chkout_date==''){
 				alert("Please select check out date");
 			}else if(!compareDate(chkin_date,chkout_date)){
 				alert("check in date must be smaller than check out date");
