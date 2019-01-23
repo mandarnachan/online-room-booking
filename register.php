@@ -419,7 +419,6 @@
 		}
 		
 		function checkEmailexistance(inputemail){
-			alert("inn");
 			$.ajax({  
 				url:"checkEmailexistance.php",  
 				type:"json",

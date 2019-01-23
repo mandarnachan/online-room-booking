@@ -133,13 +133,13 @@
 		<div id="colorlib-blog">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-7 col-md-push-5">
+					<div class="col-md-4">
 						<article class="animate-box">
 							<div class="blog-img" style="background-image: url(images/blog-1.jpg);"></div>
 						</article>
 					</div>
 
-					<div class="col-md-4 col-md-pull-7">
+					<div class="col-md-8">
 						<div class="aside animate-box">
 							<h3>Search Room</h3>
 							<form method="post" class="colorlib-form">
@@ -151,6 +151,7 @@
 										  <i class="icon icon-calendar2"></i>
 										  <input type="text" id="chkin_date" name="chkin_date" class="form-control date" placeholder="mm/dd/yyyy" readonly />
 										</div>
+										<span class="errClass" id="checkin_date_err"></span>
 									  </div>
 									</div>
 									<div class="col-md-12">
@@ -160,6 +161,7 @@
 												<i class="icon icon-calendar2"></i>
 												<input type="text" id="chkout_date" name="chkout_date" class="form-control date" placeholder="mm/dd/yyyy" readonly />
 											</div>
+											<span class="errClass" id="checkout_date_err"></span>
 										</div>
 									</div>	
 								</div>
@@ -177,19 +179,17 @@
 											<tr>
 												<td><label id="roomLabel0">Room 1</label></td>
 												<td>
-													<!--i class="icon icon-arrow-down3"></i-->
-													<select name="adults0" id="adults0" class="form-control">
-														<option value="#">1</option>
-														<option value="#">2</option>
-														<option value="#">3</option>
-														<option value="#">4</option>
+													<select name="adults0" id="adults0" class="form-control" style="width: 60px;">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
 													</select>
 												</td>
 												<td>
-													<!--i class="icon icon-arrow-down3"></i-->
 													<select name="children0" id="children0" class="form-control">
-														<option value="#">1</option>
-														<option value="#">2</option>
+														<option value="1">1</option>
+														<option value="2">2</option>
 													</select>
 												</td>
 												<td>&nbsp;&nbsp;</td>
@@ -198,52 +198,11 @@
 										<tfoot>
 											<tr>
 												<td><input type="button" value="Add room" class="btn btn-primary" onclick="javascript:addRooms();" /></td>
-												<td><input type="button" value="Search" class="btn btn-primary" onclick="javascript:validateRoomBking();" /></td>
+												<td colspan="4"><input type="button" value="Search" class="btn btn-primary" onclick="javascript:validateRoomBking();" /></td>
 											</tr>
 										</tfoot>
 									</table>	
-								<!--	<div class="col-md-2">
-										<div class="form-group">
-											<label id="roomLabel0">1</label>
-										</div>	
-									</div>
-									
-									<div class="col-md-4">
-									  <div class="form-group">
-										<label for="adults">Adults</label>
-										<div class="form-field">
-											<i class="icon icon-arrow-down3"></i>
-											<select name="adults" id="adults" class="form-control">
-												<option value="#">1</option>
-												<option value="#">2</option>
-												<option value="#">3</option>
-												<option value="#">4</option>
-											</select>
-										</div>
-									  </div>
-									</div>
-									<div class="col-md-4">
-									  <div class="form-group">
-										<label for="children">Children</label>
-										<div class="form-field">
-											<i class="icon icon-arrow-down3"></i>
-											<select name="children" id="children" class="form-control">
-												<option value="#">1</option>
-												<option value="#">2</option>
-											</select>
-										</div>
-									  </div>
-									</div>
-									<div class="col-md-2">
-										<input type="button" value="Delete" class="btn btn-primary" />
-									</div>
 								</div>
-								<div class="row">	
-									<div class="col-md-12">
-										<input type="button" value="Add room" class="btn btn-primary" onclick="javascript:addRooms();" />
-										<input type="button" value="Search" class="btn btn-primary" onclick="javascript:validateRoomBking();" />
-									</div>
-								</div>	-->
 							</form>
 						</div>
 					</div>
@@ -360,7 +319,8 @@
 		var roomStr = "";
 		var roomCount = 0;
 		var roomsArray = [];
-		
+		roomsArray[0] = 1;
+		var roomRowCount = 0;
 		$(document).ready(function() {
 			var dateInput = $('input[name="chkin_date"]'); // Our date input has the name "date"
 			var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : 'body';
@@ -392,13 +352,14 @@
 		}
 		
 		function addRooms(){
-			if(roomCount < 4){	
+			if(roomRowCount < 4){	
 				roomCount++;
+				roomRowCount++;
 				roomStr = '<tr id="subDiv'+roomCount+'"><td><label id="roomLabel'+roomCount+'"></label></td>'+
-							'<td><select name="adults'+roomCount+'" id="adults'+roomCount+'" class="form-control">'+
-							'<option value="#">1</option><option value="#">2</option><option value="#">3</option><option value="#">4</option>'+
+							'<td><select name="adults'+roomCount+'" id="adults'+roomCount+'" class="form-control" style="width: 60px;">'+
+							'<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>'+
 							'</select></td>'+
-							'<td><select name="children'+roomCount+'" id="children'+roomCount+'" class="form-control"><option value="#">1</option><option value="#">2</option>'+
+							'<td><select name="children'+roomCount+'" id="children'+roomCount+'" class="form-control"><option value="1">1</option><option value="2">2</option>'+
 							'</select></td><td><input type="button" value="Delete" class="btn btn-primary" onclick="javascript:removeRoom('+roomCount+');"/></td></tr>';
 				roomsArray[roomCount]	= 1;	  
 				$('#roomsTbody').append(roomStr);
@@ -410,7 +371,8 @@
 			$('#subDiv'+count).remove();
 			roomsArray[count]	= 0;
 			serialNumber();
-			roomCount--;
+			//roomCount--;	
+			roomRowCount--;
 		}
 		
 		function serialNumber(){		
@@ -440,19 +402,48 @@
 		}
 		
 		function validateRoomBking(){
+			$('.errClass').hide();
+			var total_people_count=0;
 			var chkin_date = $('#chkin_date').val();
 			var chkout_date = $('#chkout_date').val();
 			
 			if(chkin_date==''){
-				alert("Please select check in date");
+				$('.errClass').show();
+				$('#chkin_date').focus();
+				$('#checkin_date_err').text('Please select check in date');
 			}else if(chkout_date==''){
-				alert("Please select check out date");
+				$('.errClass').show();
+				$('#chkout_date').focus();
+				$('#checkout_date_err').text('Please select check out date');
 			}else if(!compareDate(chkin_date,chkout_date)){
-				alert("check in date must be smaller than check out date");
+				$('.errClass').show();
+				$('#chkin_date').focus();
+				$('#checkin_date_err').text('check in date must be smaller than check out date');
 			}else{
-				alert("Success!!");
-			}
 			
+				for(i=0;i<=roomCount;i++){
+					console.log("i==="+i);
+					if(roomsArray[i]>0){
+						console.log(parseInt($('#adults0').val()) + parseInt($('#children0').val()));
+					}	
+				}
+				/*$.ajax({  
+					url:"checkRoomAvailability.php",  
+					type:"json",
+					method:"POST",  
+					data:{'email_id':inputemail},  
+					success:function(data)  
+					{  
+						var result = JSON.parse(data);
+						
+						if(result.num_rows>0){
+							return false;
+						}else{
+							return true;
+						}
+					}  
+				});*/
+			}
 		}
 	</script>
 	</body>
