@@ -4,8 +4,8 @@ session_start();
 require_once("connection.php");
 include_once("functions.php");
 
-if(isset($_POST['email_id']) && $_POST['email_id']!=''){
-	$email_id =  mysqli_real_escape_string($con,addslashes(specialchars($_POST["email_id"])));
+if(isset($_POST) && $_POST['total_count']!=''){
+	$total_count =  mysqli_real_escape_string($con,addslashes(specialchars($_POST["total_count"])));
 	
 	$checkQ =  "select * from tbl_users where email = '".$email_id."' ";
 	$result = $con->query($checkQ);

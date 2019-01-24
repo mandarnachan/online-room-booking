@@ -203,10 +203,29 @@
 										</tfoot>
 									</table>	
 								</div>
+								<div class="row" id="hotelDetailsDiv" style="display:none;">
+									<table class="table">	
+										<thead>
+											<tr>
+												<th>srNo</th>
+												<th>Hotel image</th>
+												<th>Hotel name</th>
+												<th>Book</th>
+											</tr>
+										</thead>
+										<tbody id="hotelsTbody"></tbody>
+										<tfoot>
+											<tr>
+												<td colspan="4"><input type="button" value="Next" class="btn btn-primary" onclick="javascript:showRooms();" /></td>
+											</tr>
+										</tfoot>
+									</table>	
+								</div>
 							</form>
 						</div>
 					</div>
 				</div>
+				
 			</div>
 		</div>
 	
@@ -422,28 +441,44 @@
 			}else{
 			
 				for(i=0;i<=roomCount;i++){
-					console.log("i==="+i);
 					if(roomsArray[i]>0){
-						console.log(parseInt($('#adults0').val()) + parseInt($('#children0').val()));
+						total_people_count += parseInt($('#adults'+i).val()) + parseInt($('#children'+i).val());
 					}	
 				}
-				/*$.ajax({  
+				
+				$.ajax({  
 					url:"checkRoomAvailability.php",  
 					type:"json",
 					method:"POST",  
-					data:{'email_id':inputemail},  
+					data:{'total_count':total_people_count},  
 					success:function(data)  
 					{  
+						$('#roomsDiv').hide();
+						$('#hotelDetailsDiv').show();
 						var result = JSON.parse(data);
-						
-						if(result.num_rows>0){
-							return false;
-						}else{
-							return true;
+						var hotelBody = '';
+						for(i=0;i<result.length;i++){
+							hotelBody += '<tr><td>'+(i+1)+'</td>'+
+							'<td>'+result[i].hotel_img+'</td>'+
+							'<td>'+result[i].hotel_name+'</td>'+
+							'<td><input type="checkbox" id="chkhotel'+i+'" name="chkhotel'+i+'" class="hotelchkClass"/><input type="hidden" id="hotel_id'+i+'" name="hotel_id'+i+'" value="'+result[i].hotel_id+'"/></td>'+
+							'</tr>';
 						}
+						$('#hotelsTbody').append(hotelBody);
 					}  
-				});*/
+				});
 			}
+		}
+		
+		function showRooms(){
+			var rowLength = $('#hotelsTbody tr').length;
+			var hotel_id_str = "";
+			for(i=0;i<rowLength;i++){
+				if($('#chkhotel'+i).prop('checked')==true){
+					hotel_id_str += $('#hotel_id'+i).val()+",";
+				}
+			}
+			
 		}
 	</script>
 	</body>
