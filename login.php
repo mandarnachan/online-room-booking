@@ -431,7 +431,7 @@
 						var result = JSON.parse(data);
 						
 						if(result.flag>0){
-							window.location.href = "index.php";
+							window.location.href = "room_booking.php";
 						}else{
 							$('#com_err').show();
 							$('#com_err').focus();
